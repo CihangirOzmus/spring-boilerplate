@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  web-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - db-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-service:3306/emanagement_test_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8
+
+  db-service:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: emanagement_test_db
+    ports:
+      - 3306:3306

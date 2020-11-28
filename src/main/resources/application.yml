@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    time-zone: UTC
+  datasource:
+    platform: mysql
+    username: root
+    password: root
+    tomcat:
+      connection-properties: useUnicode=true;characterEncoding=utf-8;
+    url: jdbc:mysql://localhost:3306/emanagement_test_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&useUnicode=yes&characterEncoding=UTF-8&characterSetResults=UTF-8
+#    url: {SPRING_DATASOURCE_URL}
+    initialization-mode: always
+    data: classpath:data.sql
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+logging:
+  level:
+    org.hibernate:
+      SQL: debug
+      type.descriptor.sql: trace
+
+#logging.level.org.hibernate.SQL=debug
+#logging.level.org.hibernate.type.descriptor.sql=trace
+#spring.jackson.serialization.WRITE_DATES_AS_TIMESTAMPS= false
